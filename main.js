@@ -30,6 +30,8 @@ function feesh() {
   const fishRects = fish.getBoundingClientRect();
   const fWidth = fishRects.width;
   const fHeight = fishRects.height;
+  evilFish.style.width = `${fWidth}px`;
+  evilFish.style.height = `${fHeight}px`;
   evilFish.style.transform = `translate(${tWidth / 2 - fWidth / 2}px, ${tHeight / 2 - fHeight / 2}px)`;
   setTimeout(() => {
     fish.style.transition = `transform 0.4s ease-in-out`;
@@ -41,3 +43,29 @@ function feesh() {
     feesh();
   }, 3000);
 }
+
+// FISH METER
+let time = 0;
+let score = 0;
+let cheated = false;
+
+window.addEventListener("mousedown", (e) => {
+  if (e.button === 2) cheated = true;
+});
+
+evilFish.addEventListener("mouseenter", () => {
+  time = Date.now();
+});
+
+function lose() {
+  if (cheated) {
+    console.error("you rascal,,,");
+    score = "0 (haha)";
+    cheated = false;
+  } else {
+    score = Date.now() - time;
+  }
+  console.log(score);
+}
+
+evilFish.addEventListener("mouseleave", lose);
