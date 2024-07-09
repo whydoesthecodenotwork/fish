@@ -7,15 +7,10 @@ function random(min, max) {
 }
 
 function feesh() {
-  const tankRects = tank.getClientRects();
-  const tWidth = tankRects[0].width;
-  const tHeight = tankRects[0].height;
+  const tankRects = tank.getBoundingClientRect();
   const fishRects = fish.getBoundingClientRect();
-  console.log(tankRects, fishRects);
-  const fWidth = fishRects.width;
-  const fHeight = fishRects.height;
-  const newX = random(0, tWidth - fWidth);
-  const newY = random(0, tHeight - fHeight);
+  const newX = random(0, tankRects.width - fishRects.width);
+  const newY = random(0, tankRects.height - fishRects.height);
   const dist = Math.sqrt((newY - fishRects.y) ** 2 + (newX - fishRects.x) ** 2);
   if (dist < 300) {
     feesh();
@@ -43,6 +38,6 @@ function feesh() {
     evilFish.style.opacity = 1;
   }, 1);
   setTimeout(() => {
-    setTimeout(feesh, random(800, 3000));
-  }, 2000);
+    feesh();
+  }, 3000);
 }
