@@ -40,21 +40,24 @@ function feesh() {
     evilFish.style.opacity = 1;
   }, 1);
   setTimeout(() => {
+    time = Date.now();
     feesh();
   }, 3000);
 }
 
 // FISH METER
 let time = 0;
+let goodnessGraciousThatIsQuiteTheSituationYouAreIn = null;
 let score = 0;
 let cheated = false;
 
 window.addEventListener("mousedown", (e) => {
-  if (e.button === 2) cheated = true;
+  if (e.button === 2 && time > 0) cheated = true;
 });
 
 evilFish.addEventListener("mouseenter", () => {
   time = Date.now();
+  clearTimeout(goodnessGraciousThatIsQuiteTheSituationYouAreIn);
 });
 
 function lose() {
@@ -62,10 +65,15 @@ function lose() {
     console.error("you rascal,,,");
     score = "0 (haha)";
     cheated = false;
-  } else {
-    score = Date.now() - time;
   }
   console.log(score);
+  time = 0;
+  clearTimeout(goodnessGraciousThatIsQuiteTheSituationYouAreIn);
 }
 
-evilFish.addEventListener("mouseleave", lose);
+evilFish.addEventListener("mouseleave", () => {
+  goodnessGraciousThatIsQuiteTheSituationYouAreIn = setTimeout(lose, 50);
+  score = Date.now() - time;
+});
+
+window.onblur = lose;
