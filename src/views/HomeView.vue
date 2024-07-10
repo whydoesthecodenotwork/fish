@@ -1,9 +1,8 @@
-<script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <main>
-    <TheWelcome />
+    <h1>this is not the fish</h1>
+    <h2><RouterLink to="/fish">get fished</RouterLink></h2>
   </main>
 </template>
