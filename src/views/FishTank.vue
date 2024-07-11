@@ -1,8 +1,7 @@
 <template>
-  <h1>LIVE FISH REACTION</h1>
   <div class="tank" ref="tank">
     <div class="evil-tank" v-if="tankDimensions">
-      <FishComponent v-for="index in 100" :key="index" :tankRect="tankDimensions"></FishComponent>
+      <FishComponent v-for="index in 1" :key="index" :tankRect="tankDimensions"></FishComponent>
     </div>
   </div>
 </template>
@@ -24,9 +23,15 @@ onresize = getDimensions;
 </script>
 
 <style>
-h1 {
+.title {
   font-family: cursive;
   text-align: center;
+  pointer-events: none;
+  z-index: -1000;
+  position: relative;
+}
+
+h1 {
   text-decoration: underline;
 }
 
@@ -36,16 +41,16 @@ body {
 }
 
 .tank {
-  background-image: linear-gradient(to top, #004faa, #00aeff);
   height: 100vh;
   width: 100vw;
   position: absolute;
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: -2;
 }
 
 .evil-tank {
+  background-image: linear-gradient(to top, #004faa, #00aeff);
   position: absolute;
   height: 100%;
   width: 100%;
